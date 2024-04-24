@@ -5,27 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Lyrics Universe</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/styles.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Lyrics Universe</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
-                        <a class="nav-link" asp-area="" asp-controller="Favorites" asp-action="Index">Избранное</a>
-                        <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Index">Аккаунт</a>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Lyrics Universe</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                            <a class="nav-link" asp-area="" asp-controller="Favorites" asp-action="Index">Избранное</a>
+                            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Index">Аккаунт</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </header>
 
-        <content>
-            @RenderBody()
-        </content>
+        <div class="container">
+            <main>
+                @RenderBody()
+            </main>
+         </div>
 
         <footer>
 

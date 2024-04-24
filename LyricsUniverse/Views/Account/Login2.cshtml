@@ -1,0 +1,29 @@
+﻿@using LyricsUniverse.Models
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Вход";
+}
+<div class="container-md">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-3">
+            <p class="lead">@ViewData["Title"]</p>
+            <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
+                <div asp-validation-summary="All"></div>
+                <div class="mb-3">
+                    <label asp-for="Id" class="form-label-sm">Логин</label>
+                    <input asp-for="Id" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label-sm">Пароль</label>
+                    <input type="password" class="form-control">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input">
+                    <label class="form-check-label" asp-for="RememberMe">Запомнить меня?</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Подтвердить</button>
+                <a href="@Url.Action("Register", "Account")" class="btn btn-secondary">Зарегистрироваться</a>
+            </form>
+        </div>
+    </div>
+</div>

@@ -11,7 +11,7 @@ namespace LyricsUniverse.Domain.Entities
 
         [Required]
         public string UserId { get; set; }
-        public IdentityUser User { get; set; }
+        public User User { get; set; }
 
         [Required]
         public int SongId { get; set; }
