@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "_AdminLayout";
+    
+}
+@model AddViewModel
+
+<div class="container-md">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-3">
+            <p class="lead">Добавление</p>
+            <form asp-controller="Admin" asp-action="Add" method="post" class="form-horizontal" role="form">
+                <div asp-validation-summary="All"></div>
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label-sm"></label>
+                    <input asp-for="Title" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Artist" class="form-label-sm"></label>
+                    <input asp-for="Artist" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Text" class="input-group-text"></label>
+                    <textarea asp-for="Text" class="form-control"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
+    </div>
+</div>

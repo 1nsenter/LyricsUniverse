@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LyricsUniverse.Domain.Entities
+namespace LyricsUniverse.Models.Entities
 {
     public class Artist
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
         public int ArtistId { get; set; }
         [Required]

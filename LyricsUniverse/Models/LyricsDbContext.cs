@@ -1,32 +1,37 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using LyricsUniverse.Domain.Entities;
+using LyricsUniverse.Models.Entities;
 
-namespace LyricsUniverse.Domain
+namespace LyricsUniverse.Models
 {
     public class LyricsDbContext : IdentityDbContext<IdentityUser>
     {
-        DbSet<Song> Songs { get; set; }
-        DbSet<Artist> Artist { get; set; }
-        DbSet<Album> Albums { get; set; }
-        DbSet<FavoriteSong> FavoriteSongs { get; set; }
+        public DbSet<Song> Songs { get; set; }
+        public DbSet<Artist> Artists { get; set; }
+        public DbSet<Album> Albums { get; set; }
+        public DbSet<FavoriteSong> FavoriteSongs { get; set; }
 
-        public LyricsDbContext(DbContextOptions<LyricsDbContext> options) : base(options) { }
+        public LyricsDbContext(DbContextOptions<LyricsDbContext> options) : base(options)
+        {
+            Database.EnsureCreated();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            string adminLogin = "shared_admin";
+            string adminEmail = "shared_admin@mail.ru";
+            Guid adminId = Guid.NewGuid();
             Guid adminRoleId = Guid.NewGuid();
             Guid authorizedUserRoleId = Guid.NewGuid();
 
             modelBuilder.Entity<User>().HasData(new User
             {
-                Id = adminLogin,
-                UserName = adminLogin,
-                NormalizedUserName = adminLogin.ToUpper(),
+                Id = adminId.ToString(),
+                UserName = adminEmail,
+                NormalizedUserName = adminEmail.ToUpper(),
+                Email = adminEmail,
                 EmailConfirmed = true,
                 PasswordHash = new PasswordHasher<User>().HashPassword(null, "shared_admin_0000"),
                 SecurityStamp = string.Empty
@@ -49,13 +54,13 @@ namespace LyricsUniverse.Domain
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
                 RoleId = adminRoleId.ToString(),
-                UserId = adminLogin
+                UserId = adminId.ToString()
             });
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
                 RoleId = authorizedUserRoleId.ToString(),
-                UserId = adminLogin
+                UserId = adminId.ToString()
             });
         }
     }

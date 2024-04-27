@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LyricsUniverse.Domain.Entities
+namespace LyricsUniverse.Models.Entities
 {
     public class Song
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
         public int SongId { get; set; }
         [Required]
@@ -16,8 +18,8 @@ namespace LyricsUniverse.Domain.Entities
         public int ArtistId { get; set; }
         public Artist Artist { get; set; }
 
-        [Required]
-        public int AlbumId { get; set; }
-        public Album Album { get; set; }
+        //[Required]
+        //public int AlbumId { get; set; }
+        //public Album Album { get; set; }
     }
 }
