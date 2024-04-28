@@ -1,3 +1,42 @@
-﻿<div>
-    Главная
+﻿<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-4 px-sm-2 px-0">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
+                <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none text-dark">
+                    <span class="fs-5 d-none d-sm-inline">Песни</span>
+                </a>
+                <ul class="default-list">
+                    @if (Model.Songs != null)
+                    {
+                        @foreach (var song in Model.Songs)
+                        {
+                            <li class="default-list-item">
+                                <form asp-controller="Home" asp-action="SelectItem" method="post">
+                                    <input type="hidden" name="selectedItemId" value="@song.SongId" />
+                                    <input type="submit" value="@song.Artist.Title - @song.Title" class="styled-submit-button" />
+                                </form>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="default-list-item">
+                            <p text-dark>Список пуст</p>
+                        </li>
+                    }
+                </ul>
+                <hr>
+
+            </div>
+        </div>
+        <div class="col-auto py-3">
+            @if (Model.SelectedSong != null)
+            {
+                <h5>@Model.SelectedSong.Artist.Title - @Model.SelectedSong.Title</h5>
+                <div class="text-container">
+                    @Model.SelectedSong.Text
+                </div>
+            }
+        </div>
+    </div>
 </div>

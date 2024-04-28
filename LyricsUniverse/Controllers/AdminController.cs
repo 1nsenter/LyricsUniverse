@@ -3,7 +3,6 @@ using LyricsUniverse.Models.Entities;
 using LyricsUniverse.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LyricsUniverse.Controllers
 {
@@ -48,7 +47,7 @@ namespace LyricsUniverse.Controllers
                         return View(model);
                     }
 
-                    newSong.ArtistId = artist.ArtistId;
+                    newSong.Artist = artist;
                 }
                 else
                 {
@@ -59,7 +58,7 @@ namespace LyricsUniverse.Controllers
                     _context.Artists.Add(newArtist);
                     _context.SaveChanges();
 
-                    newSong.ArtistId = newArtist.ArtistId;
+                    newSong.Artist = newArtist;
                 }
 
                 newSong.Title = model.Title;

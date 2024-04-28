@@ -5,3 +5,30 @@
 .navbar-nav .nav-link {
     font-size: 18px;
 }
+
+.text-container {
+    white-space: pre-line;
+}
+
+.default-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.default-list-item {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.styled-submit-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+}
