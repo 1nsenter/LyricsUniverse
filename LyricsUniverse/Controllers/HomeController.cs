@@ -16,25 +16,24 @@ namespace LyricsUniverse.Controllers
         
         public IActionResult Index()
         {
-            var songs = _context.Songs.Include(s => s.Artist).ToList();
+            var songs = _context.Songs
+                .Include(s => s.Artist)
+                .OrderBy(s => s.Title)
+                .ToList();
 
             var model = new SongsViewModel
             {
                 Songs = songs,
-                SelectedSong = songs.FirstOrDefault()
+                SelectedSong = null
             };
+
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult SelectItem(int selectedItemId)
+        public IActionResult FavoritesAdd()
         {
-            var selectedSong = _context.Songs.Find(selectedItemId);
-            return View("Index", new SongsViewModel
-            {
-                Songs = _context.Songs.Include(s => s.Artist).ToList(),
-                SelectedSong = selectedSong
-            });
+            return View();
         }
     }
 }

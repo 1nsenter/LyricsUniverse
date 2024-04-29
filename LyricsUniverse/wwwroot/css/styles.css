@@ -32,3 +32,8 @@
     cursor: pointer;
     text-decoration: underline;
 }
+.lyrics {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}

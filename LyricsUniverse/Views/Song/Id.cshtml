@@ -3,13 +3,14 @@
         <div class="col-md-4">
             <div class="d-none d-md-block">
                 <ul class="list-group">
-                    <h5 class="mb-3">Избранное</h5>
-                    @if (Model.FavoriteSongs != null)
+                    <h5 class="mb-3">Песни от @Model.SelectedSong.Artist.Title</h5>
+                    @if (Model.SelectedSong != null)
                     {
-                        @foreach (var fList in Model.FavoriteSongs)
+                        @foreach (var song in Model.SelectedSong.Artist.Songs
+                        )
                         {
                             <li class="list-group-item">
-                                <a href="@Url.Action("Index", "Favorites", new { songId = fList.Song.SongId })" class="text-dark">@fList.Song.Title - @fList.Song.Artist.Title</a>
+                                <a href="@Url.Action("Id", "Song", new { id = song.SongId })" class="text-dark">@song.Title</a>
                             </li>
                         }
                     }
@@ -24,18 +25,18 @@
             <div class="d-md-none">
                 <div class="mb-3">
                     <button class="btn btn-secondary btn-block fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#songList" aria-expanded="false" aria-controls="songList" aria-label="Toggle navigation">
-                        Избранное
+                        Песни от @Model.SelectedSong.Artist.Title
                     </button>
                 </div>
                 <div class="collapse" id="songList">
                     <div class="card card-body">
                         <ul class="list-group">
-                            @if (Model.FavoriteSongs != null)
+                            @if (Model.SelectedSong != null)
                             {
-                                @foreach (var fList in Model.FavoriteSongs)
+                                @foreach (var song in Model.SelectedSong.Artist.Songs)
                                 {
                                     <li class="list-group-item">
-                                        <a href="@Url.Action("Index", "Favorites", new { songId = fList.Song.SongId })" class="text-dark">@fList.Song.Title - @fList.Song.Artist.Title</a>
+                                        <a href="@Url.Action("Id", "Song", new { id = song.SongId })" class="text-dark">@song.Title</a>
                                     </li>
                                 }
                             }
@@ -62,23 +63,15 @@
                         </div>
                         <div class="col mt-2">
                             <form asp-controller="Favorites" asp-action="Add" asp-route-songId="@Model.SelectedSong.SongId" method="post">
-                                <button type="submit" class="btn btn-secondary btn-block fs-6">
-                                    Удалить из списка
+                                <button type="submit" class="btn btn-primary btn-block fs-6">
+                                    Добавить в избранное
                                 </button>
                             </form>
                         </div>
                     </div>
-
+                    
                     <div class="text-container lyrics">
                         @Model.SelectedSong.Text
-                    </div>
-                }
-                else
-                {
-                    <div>
-                        <h5>
-                            Выберите песню из списка
-                        </h5>
                     </div>
                 }
             </div>

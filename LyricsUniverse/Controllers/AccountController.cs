@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using LyricsUniverse.ViewModels;
 using LyricsUniverse.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
-using LyricsUniverse.Models;
 
 namespace LyricsUniverse.Controllers
 {
