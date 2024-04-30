@@ -4,7 +4,7 @@
             <div class="d-none d-md-block">
                 <ul class="list-group">
                     <h5 class="mb-3">Избранное</h5>
-                    @if (Model.FavoriteSongs != null)
+                    @if (Model.FavoriteSongs.Count > 0)
                     {
                         @foreach (var fList in Model.FavoriteSongs)
                         {
@@ -15,7 +15,7 @@
                     }
                     else
                     {
-                        <li class="list-group-item">
+                        <li>
                             <p class="text-dark">Список пуст</p>
                         </li>
                     }
@@ -30,7 +30,7 @@
                 <div class="collapse" id="songList">
                     <div class="card card-body">
                         <ul class="list-group">
-                            @if (Model.FavoriteSongs != null)
+                            @if (Model.FavoriteSongs.Count > 0)
                             {
                                 @foreach (var fList in Model.FavoriteSongs)
                                 {
@@ -41,7 +41,7 @@
                             }
                             else
                             {
-                                <li class="list-group-item">
+                                <li>
                                     <p class="text-dark">Список пуст</p>
                                 </li>
                             }
@@ -61,7 +61,7 @@
                             <h6>@Model.SelectedSong.Artist.Title</h6>
                         </div>
                         <div class="col mt-2">
-                            <form asp-controller="Favorites" asp-action="Add" asp-route-songId="@Model.SelectedSong.SongId" method="post">
+                            <form asp-controller="Favorites" asp-action="Delete" asp-route-songId="@Model.SelectedSong.SongId" method="post">
                                 <button type="submit" class="btn btn-secondary btn-block fs-6">
                                     Удалить из списка
                                 </button>

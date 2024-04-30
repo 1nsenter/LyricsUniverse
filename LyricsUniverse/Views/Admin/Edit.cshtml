@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model EditViewModel
+
+<div class="container-md">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-3">
+            <p class="lead">Изменение песни @Model.Title</p>
+            <form asp-controller="Admin" asp-action="Edit" asp-route-songId="@Model.Id" method="post" class="form-horizontal" role="form">
+                <div asp-validation-summary="All"></div>
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label-sm"></label>
+                    <input asp-for="Title" class="form-control" value="@Model.Title">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Text" class="input-group-text"></label>
+                    <textarea asp-for="Text" class="form-control" value="@Model.Text"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -6,8 +6,7 @@
                     <h5 class="mb-3">Песни от @Model.SelectedSong.Artist.Title</h5>
                     @if (Model.SelectedSong != null)
                     {
-                        @foreach (var song in Model.SelectedSong.Artist.Songs
-                        )
+                        @foreach (var song in Model.SelectedSong.Artist.Songs)
                         {
                             <li class="list-group-item">
                                 <a href="@Url.Action("Id", "Song", new { id = song.SongId })" class="text-dark">@song.Title</a>

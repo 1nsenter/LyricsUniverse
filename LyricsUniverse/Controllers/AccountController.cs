@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using LyricsUniverse.ViewModels;
 using LyricsUniverse.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
+using LyricsUniverse.Models;
 
 namespace LyricsUniverse.Controllers
 {
@@ -10,18 +11,26 @@ namespace LyricsUniverse.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly LyricsDbContext _context;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, LyricsDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         [HttpGet]
         [Authorize(Roles = "authorizedUser")]
         public IActionResult Index()
         {
-            return View();
+            var userId = _userManager.GetUserId(User);
+            var user = _context.Users.FirstOrDefault(x => x.Id == userId);
+
+            return View(new AccountViewModel
+            {
+                CurrentUser = user
+            });
         }
 
         [HttpGet]
@@ -90,6 +99,11 @@ namespace LyricsUniverse.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToUrlOrDefault();
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
         public IActionResult RedirectToUrlOrDefault(string url = null)

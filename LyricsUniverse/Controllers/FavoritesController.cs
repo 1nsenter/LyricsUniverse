@@ -57,5 +57,21 @@ namespace LyricsUniverse.Controllers
             }
             return Redirect($"/Song/Id/{songId}");
         }
+
+        public IActionResult Delete(int songId)
+        {
+            var userId = _userManager.GetUserId(User);
+
+            if (userId != null)
+            {
+                var favoriteSong = _context.FavoriteSongs.FirstOrDefault(fs => fs.UserId == userId && fs.SongId == songId);
+                if (favoriteSong is not null)
+                {
+                    _context.FavoriteSongs.Remove(favoriteSong);
+                    _context.SaveChanges();
+                }
+            }
+            return Redirect($"/Song/Id/{songId}");
+        }
     }
 }

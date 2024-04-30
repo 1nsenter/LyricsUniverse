@@ -3,6 +3,7 @@ using LyricsUniverse.Models.Entities;
 using LyricsUniverse.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LyricsUniverse.Controllers
 {
@@ -19,7 +20,58 @@ namespace LyricsUniverse.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var songs = _context.Songs
+                .Include(s => s.Artist)
+                .OrderBy(s => s.Title)
+                .ToList();
+
+            var model = new SongsViewModel
+            {
+                Songs = songs,
+                SelectedSong = null
+            };
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int songId)
+        {
+            var song = _context.Songs.FirstOrDefault(s => s.SongId == songId);
+
+            var model = new EditViewModel
+            {
+                Title = song.Title,
+                Text = song.Text,
+                Id = songId
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditViewModel model, int songId)
+        {
+            _context.Songs.Where(s => s.SongId == songId)
+            .ExecuteUpdate(b =>
+                b.SetProperty(s => s.Title, model.Title)
+            );
+
+            _context.Songs.Where(s => s.SongId == songId)
+            .ExecuteUpdate(b =>
+                b.SetProperty(s => s.Text, model.Text)
+            );
+
+            _context.SaveChanges();
+
+            return View(model);
+        }
+
+        public IActionResult Delete(int songId)
+        {
+            var song = _context.Songs.FirstOrDefault(s => s.SongId == songId);
+            _context.Songs.Remove(song);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
