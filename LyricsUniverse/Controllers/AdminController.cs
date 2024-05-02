@@ -17,7 +17,6 @@ namespace LyricsUniverse.Controllers
             _context = context;
         }
 
-        [HttpGet]
         public IActionResult Index()
         {
             var songs = _context.Songs
@@ -63,7 +62,7 @@ namespace LyricsUniverse.Controllers
 
             _context.SaveChanges();
 
-            return View(model);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int songId)
@@ -119,7 +118,7 @@ namespace LyricsUniverse.Controllers
                 _context.Songs.Add(newSong);
                 _context.SaveChanges();
             }
-            return View();
+            return RedirectToAction("Add");
         }
     }
 }

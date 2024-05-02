@@ -1,25 +1,11 @@
-﻿<div class="container-fluid mt-4">
+﻿@model SongsViewModel
+
+<div class="container-fluid mt-4">
     <div class="row">
         <div class="col-md-4">
             <div class="d-none d-md-block">
-                <ul class="list-group">
-                    <h5 class="mb-3">Песни от @Model.SelectedSong.Artist.Title</h5>
-                    @if (Model.SelectedSong != null)
-                    {
-                        @foreach (var song in Model.SelectedSong.Artist.Songs)
-                        {
-                            <li class="list-group-item">
-                                <a href="@Url.Action("Id", "Song", new { id = song.SongId })" class="text-dark">@song.Title</a>
-                            </li>
-                        }
-                    }
-                    else
-                    {
-                        <li class="list-group-item">
-                            <p class="text-dark">Список пуст</p>
-                        </li>
-                    }
-                </ul>
+                <h5 class="mb-3">Песни от @Model.SelectedSong.Artist.Title</h5>
+                @await Html.PartialAsync("SongsPartial", Model)
             </div>
             <div class="d-md-none">
                 <div class="mb-3">
@@ -29,23 +15,7 @@
                 </div>
                 <div class="collapse" id="songList">
                     <div class="card card-body">
-                        <ul class="list-group">
-                            @if (Model.SelectedSong != null)
-                            {
-                                @foreach (var song in Model.SelectedSong.Artist.Songs)
-                                {
-                                    <li class="list-group-item">
-                                        <a href="@Url.Action("Id", "Song", new { id = song.SongId })" class="text-dark">@song.Title</a>
-                                    </li>
-                                }
-                            }
-                            else
-                            {
-                                <li class="list-group-item">
-                                    <p class="text-dark">Список пуст</p>
-                                </li>
-                            }
-                        </ul>
+                        @await Html.PartialAsync("SongsPartial", Model)
                     </div>
                 </div>
             </div>
@@ -71,6 +41,7 @@
                     
                     <div class="text-container lyrics">
                         @Model.SelectedSong.Text
+                        <p></p>
                     </div>
                 }
             </div>

@@ -1,0 +1,17 @@
+﻿<ul class="list-group">
+    @if (Model.SelectedSong != null)
+    {
+        @foreach (var song in Model.SelectedSong.Artist.Songs)
+        {
+            <li class="list-group-item">
+                <a href="@Url.Action("Id", "Song", new { id = song.SongId })" class="text-dark link">@song.Title</a>
+            </li>
+        }
+    }
+    else
+    {
+        <li class="list-group-item">
+            <p class="text-dark">Список пуст</p>
+        </li>
+    }
+</ul>

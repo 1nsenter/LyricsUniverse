@@ -1,0 +1,17 @@
+﻿<ul class="list-group">
+    @if (Model.FavoriteSongs.Count > 0)
+    {
+        @foreach (var fList in Model.FavoriteSongs)
+        {
+            <li class="list-group-item">
+                <a href="@Url.Action("Index", "Favorites", new { songId = fList.Song.SongId })" class="text-dark link">@fList.Song.Title - @fList.Song.Artist.Title</a>
+            </li>
+        }
+    }
+    else
+    {
+        <li>
+            <p class="text-dark">Список пуст</p>
+        </li>
+    }
+</ul>

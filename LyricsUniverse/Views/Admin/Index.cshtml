@@ -2,12 +2,14 @@
     Layout = "_AdminLayout";
 }
 
+@model SongsViewModel
+
 <div class="container-md">
     <div class="row justify-content-center">
-        <div class="col-md-6 mt-3">
+        <div class="col-md-8 mt-3">
             <ul class="list-group">
                 <p class="lead text-center">Редактировать</p>
-                @if (Model.Songs != null)
+                @if (Model.Songs.Count > 0)
                 {
                     @foreach (var song in Model.Songs)
                     {
