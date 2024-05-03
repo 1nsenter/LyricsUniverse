@@ -29,11 +29,5 @@ namespace LyricsUniverse.Controllers
 
             return View(model);
         }
-
-        [HttpPost]
-        public IActionResult FavoritesAdd()
-        {
-            return View();
-        }
     }
 }

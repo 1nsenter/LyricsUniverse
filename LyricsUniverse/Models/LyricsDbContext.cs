@@ -9,7 +9,6 @@ namespace LyricsUniverse.Models
     {
         public DbSet<Song> Songs { get; set; }
         public DbSet<Artist> Artists { get; set; }
-        public DbSet<Album> Albums { get; set; }
         public DbSet<FavoriteSong> FavoriteSongs { get; set; }
 
         public LyricsDbContext(DbContextOptions<LyricsDbContext> options) : base(options)

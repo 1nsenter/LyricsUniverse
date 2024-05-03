@@ -43,7 +43,9 @@ namespace LyricsUniverse.Controllers
 
             if (userId != null)
             {
-                var favoriteSong = _context.FavoriteSongs.FirstOrDefault(fs => fs.UserId == userId && fs.SongId == songId);
+                var favoriteSong = _context.FavoriteSongs.FirstOrDefault(fs => fs.UserId == userId &&
+                    fs.SongId == songId);
+
                 if (favoriteSong is null)
                 {
                     _context.FavoriteSongs.Add(new FavoriteSong
@@ -55,7 +57,7 @@ namespace LyricsUniverse.Controllers
                    
                 }
             }
-            return Redirect($"/Song/Id/{songId}");
+            return Redirect($"/Favorites?songId={songId}");
         }
 
         public IActionResult Delete(int songId)
@@ -64,7 +66,9 @@ namespace LyricsUniverse.Controllers
 
             if (userId != null)
             {
-                var favoriteSong = _context.FavoriteSongs.FirstOrDefault(fs => fs.UserId == userId && fs.SongId == songId);
+                var favoriteSong = _context.FavoriteSongs.FirstOrDefault(fs => fs.UserId == userId &&
+                    fs.SongId == songId);
+
                 if (favoriteSong is not null)
                 {
                     _context.FavoriteSongs.Remove(favoriteSong);

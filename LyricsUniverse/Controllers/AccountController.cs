@@ -13,7 +13,8 @@ namespace LyricsUniverse.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly LyricsDbContext _context;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, LyricsDbContext context)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager,
+            LyricsDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -47,7 +48,8 @@ namespace LyricsUniverse.Controllers
 
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password,
+                    model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     return RedirectToUrlOrDefault(returnUrl);
