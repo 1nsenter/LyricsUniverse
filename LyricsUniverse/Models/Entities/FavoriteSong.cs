@@ -8,7 +8,7 @@ namespace LyricsUniverse.Models.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
-        public int FavoriteSongId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string UserId { get; set; }

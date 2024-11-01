@@ -4,7 +4,7 @@
         @foreach (var song in Model.SelectedSong.Artist.Songs)
         {
             <li class="list-group-item">
-                <a href="@Url.Action("Id", "Song", new { id = song.SongId })" class="text-dark link">@song.Title</a>
+                <a href="@Url.Action("Id", "Song", new { id = song.Id })" class="text-dark link">@song.Title</a>
             </li>
         }
     }

@@ -2,7 +2,7 @@
 
 namespace LyricsUniverse.ViewModels
 {
-    public class AddViewModel
+    public class CreateSongViewModel
     {
         [Required]
         [Display(Name = "Название")]
@@ -17,6 +17,6 @@ namespace LyricsUniverse.ViewModels
         public string Text { get; set; }
 
         [Display(Name = "Перевод")]
-        public string Translate { get; set; }
+        public string? Translate { get; set; }
     }
 }

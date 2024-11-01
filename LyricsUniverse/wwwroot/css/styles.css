@@ -41,3 +41,8 @@
 .link {
     text-decoration: none;
 }
+
+.ins-rightside {
+    display: flex;
+    justify-content: right;
+}

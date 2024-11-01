@@ -97,10 +97,53 @@ namespace LyricsUniverse.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "authorizedUser")]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToUrlOrDefault();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "authorizedUser")]
+        public IActionResult CreateSong()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "authorizedUser")]
+        public IActionResult CreateSong(CreateSongViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Song newSong = new Song();
+
+                var artist = _context.GetArtistByTitle(model.Artist);
+                if (artist != null)
+                {
+                    var song = _context.GetSongByArtistAndTitle(artist, model.Title);
+
+                    if (song != null)
+                    {
+                        ModelState.AddModelError(string.Empty, "Такая песня уже есть в базе данных. " +
+                            "Вы можете отредактировать ее в любой момент.");
+                        return View(model);
+                    }
+
+                    newSong.Artist = artist;
+                }
+                else
+                    newSong.Artist = _context.CreateNewArtist(model.Artist);
+
+                newSong.Title = model.Title;
+                newSong.Text = model.Text;
+                newSong.Translate = model.Translate;
+                newSong.isModerated = false;
+
+                _context.AddSong(newSong);
+            }
+            return View(model);
         }
 
         public IActionResult AccessDenied()

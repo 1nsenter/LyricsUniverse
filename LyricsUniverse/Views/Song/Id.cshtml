@@ -2,7 +2,7 @@
 
 <div class="container-fluid mt-4">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-2">
             <div class="d-none d-md-block">
                 <h5 class="mb-3">Песни от @Model.SelectedSong.Artist.Title</h5>
                 @await Html.PartialAsync("SongsPartial", Model)
@@ -21,30 +21,33 @@
             </div>
         </div>
 
-        <div class="col-md-8">
-            <div>
-                @if (Model.SelectedSong != null)
-                {
-                    <div class="row">
-                        <div class="col">
-                            <h5>@Model.SelectedSong.Title</h5>
-                            <h6>@Model.SelectedSong.Artist.Title</h6>
-                        </div>
-                        <div class="col mt-2">
-                            <form asp-controller="Favorites" asp-action="Add" asp-route-songId="@Model.SelectedSong.SongId" method="post">
-                                <button type="submit" class="btn btn-primary btn-block fs-6">
-                                    Добавить в избранное
-                                </button>
-                            </form>
-                        </div>
+        <div class="col-10">
+            @if (Model.SelectedSong != null)
+            {
+                <div class="row">
+                    <div class="col-10">
+                        <h5>@Model.SelectedSong.Title</h5>
+                        <h6>@Model.SelectedSong.Artist.Title</h6>
                     </div>
+                    <div class="col-2 mt-2">
+                        <form asp-controller="Favorites" asp-action="Add" asp-route-songId="@Model.SelectedSong.Id" method="post">
+                            <button type="submit" class="btn btn-primary btn-block fs-6">
+                                Добавить в избранное
+                            </button>
+                        </form>
+                    </div>
+                </div>
                     
-                    <div class="text-container lyrics">
+                <div class="row text-container lyrics">
+                    <div class="col-5">
                         @Model.SelectedSong.Text
-                        <p></p>
                     </div>
-                }
-            </div>
+                    <div class="col-5">
+                        @Model.SelectedSong.Translate
+                    </div>
+                    <p></p>
+                </div>
+            }
         </div>
     </div>
 </div>

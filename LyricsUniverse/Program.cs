@@ -36,7 +36,7 @@ namespace LyricsUniverse
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.ExpireTimeSpan = TimeSpan.FromDays(7);
 
                 options.LoginPath = "/Account/Login";
                 options.AccessDeniedPath = "/Account/AccessDenied";
@@ -60,13 +60,9 @@ namespace LyricsUniverse
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //app.MapControllerRoute(
-            //    name: "default",
-            //   pattern: "{controller=Home}/{action=Index}/{id?}");
-
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Admin}/{action=Index}/{id?}");
+               pattern: "{controller=Test}/{action=Index}/{id?}");
 
             app.Run();
         }

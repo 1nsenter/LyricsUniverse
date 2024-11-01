@@ -36,7 +36,7 @@ namespace LyricsUniverse.Controllers
         [HttpGet]
         public IActionResult Edit(int songId)
         {
-            var song = _context.Songs.FirstOrDefault(s => s.SongId == songId);
+            var song = _context.Songs.FirstOrDefault(s => s.Id == songId);
 
             var model = new EditViewModel
             {
@@ -50,12 +50,12 @@ namespace LyricsUniverse.Controllers
         [HttpPost]
         public IActionResult Edit(EditViewModel model, int songId)
         {
-            _context.Songs.Where(s => s.SongId == songId)
+            _context.Songs.Where(s => s.Id == songId)
             .ExecuteUpdate(b =>
                 b.SetProperty(s => s.Title, model.Title)
             );
 
-            _context.Songs.Where(s => s.SongId == songId)
+            _context.Songs.Where(s => s.Id == songId)
             .ExecuteUpdate(b =>
                 b.SetProperty(s => s.Text, model.Text)
             );
@@ -67,7 +67,7 @@ namespace LyricsUniverse.Controllers
 
         public IActionResult Delete(int songId)
         {
-            var song = _context.Songs.FirstOrDefault(s => s.SongId == songId);
+            var song = _context.Songs.FirstOrDefault(s => s.Id == songId);
             _context.Songs.Remove(song);
             _context.SaveChanges();
             return RedirectToAction("Index");
@@ -86,10 +86,10 @@ namespace LyricsUniverse.Controllers
             {
                 Song newSong = new Song();
 
-                var artist = _context.Artists.FirstOrDefault(e => e.Title.ToUpper() == model.Artist.ToUpper());
+                var artist = _context.GetArtistByTitle(model.Artist);
                 if (artist != null)
                 {
-                    var song = _context.Songs.FirstOrDefault(e => e.Title.ToUpper() == model.Title.ToUpper());
+                    var song = _context.GetSongByArtistAndTitle(artist, model.Title);
 
                     if (song != null)
                     {
@@ -101,22 +101,13 @@ namespace LyricsUniverse.Controllers
                     newSong.Artist = artist;
                 }
                 else
-                {
-                    Artist newArtist = new Artist
-                    {
-                        Title = model.Artist,
-                    };
-                    _context.Artists.Add(newArtist);
-                    _context.SaveChanges();
-
-                    newSong.Artist = newArtist;
-                }
+                    newSong.Artist = _context.CreateNewArtist(model.Artist);
 
                 newSong.Title = model.Title;
                 newSong.Text = model.Text;
+                newSong.Translate = model.Translate;
 
-                _context.Songs.Add(newSong);
-                _context.SaveChanges();
+                _context.AddSong(newSong);
             }
             return RedirectToAction("Add");
         }
