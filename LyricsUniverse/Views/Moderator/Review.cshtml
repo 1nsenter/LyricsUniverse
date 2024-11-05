@@ -1,0 +1,33 @@
+﻿@model ReviewViewModel
+
+<div class="container-md">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-3">
+            <p class="lead">Песня на проверке @Model.ArtistTitle - @Model.Title</p>
+            <form id="approve-form" asp-controller="Moderator" asp-action="Approve" asp-route-songId="@Model.Id" method="post" class="form-horizontal" role="form">
+                <div asp-validation-summary="All"></div>
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label-sm"></label>
+                    <input asp-for="Title" class="form-control" value="@Model.Title">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Text" class="input-group-text"></label>
+                    <textarea asp-for="@Model.Text" class="form-control" value="@Model.Text" rows="12"></textarea>
+                </div>
+                @if (Model.Translate != null)
+                {
+                    <div class="mb-3">
+                        <label asp-for="@Model.Translate" class="input-group-text"></label>
+                        <textarea asp-for="@Model.Translate" class="form-control" value="@Model.Translate" rows="12"></textarea>
+                    </div>
+                }      
+            </form>
+            <div class="d-flex mb-3">
+                <button type="submit" class="btn btn-primary me-2" form="approve-form">Одобрить</button>
+                <form asp-controller="Moderator" asp-action="Decline" asp-route-songId="@Model.Id" method="post" class="form-horizontal" role="form">
+                    <button type="submit" class="btn btn-danger">Отклонить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

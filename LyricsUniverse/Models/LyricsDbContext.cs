@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using LyricsUniverse.Models.Entities;
+using LyricsUniverse.ViewModels;
 
 namespace LyricsUniverse.Models
 {
@@ -69,9 +70,35 @@ namespace LyricsUniverse.Models
             SaveChanges();
         }
 
-        public List<Song>? GetUnmoderatedSongs()
+        public List<Song>? GetSongs(bool isModerated)
         {
-            return Songs.Where(s => s.isModerated == false).Include(a => a.Artist).ToList();
+            return Songs.Where(s => s.isModerated == isModerated).Include(a => a.Artist).ToList();
+        }
+
+        public Song? CreateSong(CreateSongViewModel model)
+        {
+            Song createdSong = new Song();
+
+            var artist = GetArtistByTitle(model.Artist);
+            if (artist != null)
+            {
+                var song = GetSongByArtistAndTitle(artist, model.Title);
+
+                if (song != null)
+                    return null;
+
+                createdSong.Artist = artist;
+            }
+            else
+                createdSong.Artist = CreateNewArtist(model.Artist);
+
+            createdSong.Title = model.Title;
+            createdSong.Text = model.Text;
+            createdSong.Translate = model.Translate;
+            createdSong.isModerated = false;
+            createdSong.CreatedAt = DateTime.Now;
+
+            return createdSong;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

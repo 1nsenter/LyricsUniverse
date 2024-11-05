@@ -17,7 +17,10 @@ namespace LyricsUniverse.Models.Entities
         public string? Translate { get; set; }
 
         [Required]
-        public bool isModerated { get; set; } 
+        public bool isModerated { get; set; }
+
+        [Required]
+        public DateTime CreatedAt { get; set; }
 
         [Required]
         public int ArtistId { get; set; }

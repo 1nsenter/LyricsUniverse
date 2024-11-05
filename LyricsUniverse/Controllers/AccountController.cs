@@ -115,31 +115,17 @@ namespace LyricsUniverse.Controllers
         [Authorize(Roles = "authorizedUser")]
         public IActionResult CreateSong(CreateSongViewModel model)
         {
+            Song? newSong;
+
             if (ModelState.IsValid)
             {
-                Song newSong = new Song();
+                newSong = _context.CreateSong(model);
 
-                var artist = _context.GetArtistByTitle(model.Artist);
-                if (artist != null)
+                if (newSong == null)
                 {
-                    var song = _context.GetSongByArtistAndTitle(artist, model.Title);
-
-                    if (song != null)
-                    {
-                        ModelState.AddModelError(string.Empty, "Такая песня уже есть в базе данных. " +
-                            "Вы можете отредактировать ее в любой момент.");
-                        return View(model);
-                    }
-
-                    newSong.Artist = artist;
+                    ModelState.AddModelError(string.Empty, "Такая песня уже есть в базе данных.");
+                    return View(model);
                 }
-                else
-                    newSong.Artist = _context.CreateNewArtist(model.Artist);
-
-                newSong.Title = model.Title;
-                newSong.Text = model.Text;
-                newSong.Translate = model.Translate;
-                newSong.isModerated = false;
 
                 _context.AddSong(newSong);
             }

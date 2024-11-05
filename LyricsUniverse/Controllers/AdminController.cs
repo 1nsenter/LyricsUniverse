@@ -60,6 +60,11 @@ namespace LyricsUniverse.Controllers
                 b.SetProperty(s => s.Text, model.Text)
             );
 
+            _context.Songs.Where(s => s.Id == songId)
+            .ExecuteUpdate(b =>
+                b.SetProperty(s => s.Id, 123)
+            );
+
             _context.SaveChanges();
 
             return RedirectToAction("Index");

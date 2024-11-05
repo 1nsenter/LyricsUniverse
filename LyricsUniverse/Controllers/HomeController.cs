@@ -16,10 +16,7 @@ namespace LyricsUniverse.Controllers
         
         public IActionResult Index()
         {
-            var songs = _context.Songs
-                .Include(s => s.Artist)
-                .OrderBy(s => s.Title)
-                .ToList();
+            var songs = _context.GetSongs(true);
 
             var model = new SongsViewModel
             {
