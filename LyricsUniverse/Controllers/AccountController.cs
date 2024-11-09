@@ -48,7 +48,9 @@ namespace LyricsUniverse.Controllers
 
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password,
+                var user = await _userManager.FindByEmailAsync(model.Email);
+
+                var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password,
                     model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {

@@ -1,51 +1,54 @@
 ﻿@model SongsViewModel
 
-<div class="container-fluid mt-4">
-    <div class="row">
-        <div class="col-2">
+<div class="container-fluid mt-1">
+    <div class="row ins-full-height-row">
+        <div class="col-2 ins-fixed-col">
             <div class="d-none d-md-block">
                 <h5 class="mb-3">Песни от @Model.SelectedSong.Artist.Title</h5>
                 @await Html.PartialAsync("SongsPartial", Model)
             </div>
-            <div class="d-md-none">
-                <div class="mb-3">
-                    <button class="btn btn-secondary btn-block fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#songList" aria-expanded="false" aria-controls="songList" aria-label="Toggle navigation">
-                        Песни от @Model.SelectedSong.Artist.Title
-                    </button>
-                </div>
-                <div class="collapse" id="songList">
-                    <div class="card card-body">
-                        @await Html.PartialAsync("SongsPartial", Model)
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <div class="col-10">
+        <div class="col-10 ins-main-col">
             @if (Model.SelectedSong != null)
             {
                 <div class="row">
-                    <div class="col-10">
+                    <div class="col-6 mb-3">
                         <h5>@Model.SelectedSong.Title</h5>
                         <h6>@Model.SelectedSong.Artist.Title</h6>
                     </div>
-                    <div class="col-2 mt-2">
-                        <form asp-controller="Favorites" asp-action="Add" asp-route-songId="@Model.SelectedSong.Id" method="post">
-                            <button type="submit" class="btn btn-primary btn-block fs-6">
-                                Добавить в избранное
-                            </button>
-                        </form>
+                    <div class="col-6 d-flex justify-content-end mb-3">
+                        @if (Model.CurrentUserRoles.Contains(AppRole.Admin) || Model.CurrentUserRoles.Contains(AppRole.Moderator))
+                        {
+                            <form asp-controller="" asp-action="" asp-route-songId="@Model.SelectedSong.Id" method="post" class="ms-1">
+                                <button type="submit" class="ins-btn ins-btn-body ins-btn-rectangel">
+                                    <img src="~/images/close.png" alt="Удалить" class="ins-icon-img">
+                                </button>
+                            </form>
+                            <form asp-controller="" asp-action="" asp-route-songId="@Model.SelectedSong.Id" method="post" class="ms-1">
+                                <button type="submit" class="ins-btn ins-btn-body ins-btn-rectangel">
+                                    <img src="~/images/pen.png" alt="Редактировать" class="ins-icon-img">
+                                </button>
+                            </form>
+                        }
+                        @if (Model.CurrentUserRoles.Contains(AppRole.AuthorizedUser))
+                        {
+                            <form asp-controller="Favorites" asp-action="Add" asp-route-songId="@Model.SelectedSong.Id" method="post" class="ms-1">
+                                <button type="submit" class="ins-btn ins-btn-body ins-btn-rectangel">
+                                    <img src="~/images/heart.png" alt="Избранное" class="ins-icon-img">
+                                </button>
+                            </form>
+                        }       
                     </div>
                 </div>
-                    
-                <div class="row text-container lyrics">
-                    <div class="col-5">
+
+                <div class="row">
+                    <div class="text-container lyrics col-6">
                         @Model.SelectedSong.Text
                     </div>
-                    <div class="col-5">
+                    <div class="text-container lyrics col-6">
                         @Model.SelectedSong.Translate
                     </div>
-                    <p></p>
                 </div>
             }
         </div>

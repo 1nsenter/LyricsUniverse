@@ -55,26 +55,57 @@
     font-size: 0.5rem;
 }
 
-/* Круглая кнопка */
-.btn-circle {
+.ins-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 40px; /* Размер кнопки */
     height: 40px; /* Размер кнопки */
-    background-color: whitesmoke; /* Цвет фона кнопки */
-    border-radius: 50%; /* Делает кнопку круглой */
     color: #fff; /* Цвет текста или иконки */
     text-decoration: none;
     padding: 0;
 }
 
-.btn-circle:hover {
-    background-color: #0056b3; /* Цвет при наведении */
+.ins-btn:hover {
+    background-color: gainsboro;
+}
+
+.ins-btn-navbar {
+    background-color: whitesmoke;
+}
+
+.ins-btn-body {
+    background-color: whitesmoke;
+}
+
+.ins-btn-rectangel {
+    border-radius: 8px;
+}
+
+.ins-btn-circle {
+    border-radius: 50%
 }
 
 /* Стили для изображения внутри кнопки */
-.icon-img {
+.ins-icon-img {
     width: 24px; /* Размер изображения */
     height: 24px;
+}
+
+.ins-full-height-row {
+    height: 100vh;
+}
+
+/* Фиксируем первые две колонки */
+.ins-fixed-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+/* Основная колонка с прокруткой */
+.ins-main-col {
+    overflow-y: auto;
+    padding: 1rem;
 }

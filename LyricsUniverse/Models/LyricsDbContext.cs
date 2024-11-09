@@ -118,10 +118,15 @@ namespace LyricsUniverse.Models
             string adminName = "SharedAdmin";
             Guid adminId = Guid.NewGuid();
             Guid adminRoleId = Guid.NewGuid();
+
             string moderatorEmail = "shared_moderator@mail.ru";
             string moderatorName = "SharedModerator";
             Guid moderatorId = Guid.NewGuid();
             Guid moderatorRoleId = Guid.NewGuid();
+
+            string userEmail = "shared_user@mail.ru";
+            string userName = "SharedUser";
+            Guid userId = Guid.NewGuid();
             Guid authorizedUserRoleId = Guid.NewGuid();
 
             modelBuilder.Entity<User>().HasData(new User
@@ -130,6 +135,7 @@ namespace LyricsUniverse.Models
                 UserName = adminName,
                 NormalizedUserName = adminName.ToUpper(),
                 Email = adminEmail,
+                NormalizedEmail = adminEmail.ToUpper(),
                 EmailConfirmed = true,
                 PasswordHash = new PasswordHasher<User>().HashPassword(null, "shared_admin_0000"),
                 SecurityStamp = string.Empty
@@ -141,8 +147,21 @@ namespace LyricsUniverse.Models
                 UserName = moderatorName,
                 NormalizedUserName = moderatorName.ToUpper(),
                 Email = moderatorEmail,
+                NormalizedEmail = moderatorEmail.ToUpper(),
                 EmailConfirmed = true,
                 PasswordHash = new PasswordHasher<User>().HashPassword(null, "shared_moderator_0000"),
+                SecurityStamp = string.Empty
+            });
+
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = userId.ToString(),
+                UserName = userName,
+                NormalizedUserName = userName.ToUpper(),
+                Email = userEmail,
+                NormalizedEmail = userEmail.ToUpper(),
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<User>().HashPassword(null, "shared_user_0000"),
                 SecurityStamp = string.Empty
             });
 
@@ -189,6 +208,12 @@ namespace LyricsUniverse.Models
             {
                 RoleId = authorizedUserRoleId.ToString(),
                 UserId = moderatorId.ToString()
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = authorizedUserRoleId.ToString(),
+                UserId = userId.ToString()
             });
         }
     }
