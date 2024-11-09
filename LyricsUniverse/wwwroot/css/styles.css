@@ -46,3 +46,35 @@
     display: flex;
     justify-content: right;
 }
+
+.ins-fs-7 {
+    font-size: 0.75rem;
+}
+
+.ins-fs-8 {
+    font-size: 0.5rem;
+}
+
+/* Круглая кнопка */
+.btn-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; /* Размер кнопки */
+    height: 40px; /* Размер кнопки */
+    background-color: whitesmoke; /* Цвет фона кнопки */
+    border-radius: 50%; /* Делает кнопку круглой */
+    color: #fff; /* Цвет текста или иконки */
+    text-decoration: none;
+    padding: 0;
+}
+
+.btn-circle:hover {
+    background-color: #0056b3; /* Цвет при наведении */
+}
+
+/* Стили для изображения внутри кнопки */
+.icon-img {
+    width: 24px; /* Размер изображения */
+    height: 24px;
+}

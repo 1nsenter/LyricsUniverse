@@ -52,16 +52,13 @@ namespace LyricsUniverse.Models
             }
         }
 
-        public Song GetSongByArtistAndTitle(Artist artist, string title)
+        public Song? GetSongByArtistAndTitle(Artist artist, string title)
         {
             Song? song = Songs.FirstOrDefault(s =>
                         s.Artist.Id == artist.Id &&
                         s.Title.ToUpper() == title.ToUpper());
 
-            if (song != null)
-                return song;
-            else
-                throw new Exception($"A song '{title}' by {artist.Title} was not found.");
+            return song;        
         }
 
         public void AddSong(Song song)
@@ -72,7 +69,19 @@ namespace LyricsUniverse.Models
 
         public List<Song>? GetSongs(bool isModerated)
         {
-            return Songs.Where(s => s.isModerated == isModerated).Include(a => a.Artist).ToList();
+            return Songs
+                .Where(s => s.isModerated == isModerated)
+                .Include(a => a.Artist)      
+                .ToList();
+        }
+
+        public List<Song>? GetLastApprovedSongs()
+        {
+            return Songs
+                .Where(s => s.isModerated == true)
+                .Include(a => a.Artist)
+                .OrderByDescending(s => s.ApprovedAt)
+                .ToList();
         }
 
         public Song? CreateSong(CreateSongViewModel model)

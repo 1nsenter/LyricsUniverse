@@ -16,10 +16,17 @@ namespace LyricsUniverse.Controllers
         
         public IActionResult Index()
         {
-            var songs = _context.GetSongs(true);
+            int displaySongsCount;
+            var songs = _context.GetLastApprovedSongs();
+
+            if (songs.Count >= 10)
+                displaySongsCount = 10;
+            else
+                displaySongsCount = songs.Count;
 
             var model = new SongsViewModel
             {
+                DisplaySongsCount = displaySongsCount,
                 Songs = songs,
                 SelectedSong = null
             };

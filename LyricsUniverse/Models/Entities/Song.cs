@@ -22,6 +22,8 @@ namespace LyricsUniverse.Models.Entities
         [Required]
         public DateTime CreatedAt { get; set; }
 
+        public DateTime? ApprovedAt { get; set; }
+
         [Required]
         public int ArtistId { get; set; }
         public Artist Artist { get; set; }
