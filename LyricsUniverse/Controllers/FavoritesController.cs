@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LyricsUniverse.Controllers
 {
-    [Authorize(Roles = "authorizedUser")]
+    [Authorize(Roles = "AuthorizedUser")]
     public class FavoritesController : Controller
     {
         private readonly LyricsDbContext _context;

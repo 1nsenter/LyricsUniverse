@@ -1,6 +1,6 @@
 ﻿namespace LyricsUniverse.Models
 {
-    public enum AppRoles
+    public enum AppRole
     {
         AuthorizedUser,
         Moderator,

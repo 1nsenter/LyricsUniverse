@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LyricsUniverse.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly LyricsDbContext _context;

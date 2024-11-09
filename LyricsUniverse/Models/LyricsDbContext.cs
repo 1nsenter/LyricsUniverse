@@ -115,9 +115,11 @@ namespace LyricsUniverse.Models
             base.OnModelCreating(modelBuilder);
 
             string adminEmail = "shared_admin@mail.ru";
+            string adminName = "SharedAdmin";
             Guid adminId = Guid.NewGuid();
             Guid adminRoleId = Guid.NewGuid();
             string moderatorEmail = "shared_moderator@mail.ru";
+            string moderatorName = "SharedModerator";
             Guid moderatorId = Guid.NewGuid();
             Guid moderatorRoleId = Guid.NewGuid();
             Guid authorizedUserRoleId = Guid.NewGuid();
@@ -125,8 +127,8 @@ namespace LyricsUniverse.Models
             modelBuilder.Entity<User>().HasData(new User
             {
                 Id = adminId.ToString(),
-                UserName = adminEmail,
-                NormalizedUserName = adminEmail.ToUpper(),
+                UserName = adminName,
+                NormalizedUserName = adminName.ToUpper(),
                 Email = adminEmail,
                 EmailConfirmed = true,
                 PasswordHash = new PasswordHasher<User>().HashPassword(null, "shared_admin_0000"),
@@ -136,8 +138,8 @@ namespace LyricsUniverse.Models
             modelBuilder.Entity<User>().HasData(new User
             {
                 Id = moderatorId.ToString(),
-                UserName = moderatorEmail,
-                NormalizedUserName = moderatorEmail.ToUpper(),
+                UserName = moderatorName,
+                NormalizedUserName = moderatorName.ToUpper(),
                 Email = moderatorEmail,
                 EmailConfirmed = true,
                 PasswordHash = new PasswordHasher<User>().HashPassword(null, "shared_moderator_0000"),
@@ -147,22 +149,22 @@ namespace LyricsUniverse.Models
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
                 Id = adminRoleId.ToString(),
-                Name = "admin",
-                NormalizedName = "ADMIN"
+                Name = AppRole.Admin.ToString(),
+                NormalizedName = AppRole.Admin.ToString().ToUpper()
             });
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
                 Id = moderatorRoleId.ToString(),
-                Name = "moderator",
-                NormalizedName = "MODERATOR"
+                Name = AppRole.Moderator.ToString(),
+                NormalizedName = AppRole.Moderator.ToString().ToUpper()
             });
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
                 Id = authorizedUserRoleId.ToString(),
-                Name = "authorizedUser",
-                NormalizedName = "AUTHORIZEDUSER"
+                Name = AppRole.AuthorizedUser.ToString(),
+                NormalizedName = AppRole.AuthorizedUser.ToString().ToUpper()
             });
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>

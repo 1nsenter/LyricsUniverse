@@ -22,7 +22,7 @@ namespace LyricsUniverse.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "authorizedUser")]
+        [Authorize(Roles = "AuthorizedUser")]
         public IActionResult Index()
         {
             var userId = _userManager.GetUserId(User);
@@ -76,12 +76,12 @@ namespace LyricsUniverse.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Email, Id = Guid.NewGuid().ToString() };
+                User user = new User { Email = model.Email, UserName = model.Name, Id = Guid.NewGuid().ToString() };
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "authorizedUser");
+                    await _userManager.AddToRoleAsync(user, AppRole.AuthorizedUser.ToString());
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToUrlOrDefault(returnUrl);
                 }
@@ -97,7 +97,7 @@ namespace LyricsUniverse.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "authorizedUser")]
+        [Authorize(Roles = "AuthorizedUser")]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -105,14 +105,14 @@ namespace LyricsUniverse.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "authorizedUser")]
+        [Authorize(Roles = "AuthorizedUser")]
         public IActionResult CreateSong()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorize(Roles = "authorizedUser")]
+        [Authorize(Roles = "AuthorizedUser")]
         public IActionResult CreateSong(CreateSongViewModel model)
         {
             Song? newSong;
