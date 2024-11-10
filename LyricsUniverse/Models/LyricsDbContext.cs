@@ -199,32 +199,38 @@ namespace LyricsUniverse.Models
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
-                RoleId = adminRoleId.ToString(),
-                UserId = adminId.ToString()
+                UserId = adminId.ToString(),
+                RoleId = adminRoleId.ToString()
             });
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
-                RoleId = moderatorRoleId.ToString(),
-                UserId = moderatorId.ToString()
+                UserId = adminId.ToString(),
+                RoleId = authorizedUserRoleId.ToString()
             });
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
-                RoleId = authorizedUserRoleId.ToString(),
-                UserId = adminId.ToString()
+                UserId = adminId.ToString(),
+                RoleId = moderatorRoleId.ToString()
             });
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
-                RoleId = authorizedUserRoleId.ToString(),
-                UserId = moderatorId.ToString()
+                UserId = moderatorId.ToString(),
+                RoleId = moderatorRoleId.ToString()
             });
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
-                RoleId = authorizedUserRoleId.ToString(),
-                UserId = userId.ToString()
+                UserId = moderatorId.ToString(),
+                RoleId = authorizedUserRoleId.ToString()
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                UserId = userId.ToString(),
+                RoleId = authorizedUserRoleId.ToString()
             });
         }
     }

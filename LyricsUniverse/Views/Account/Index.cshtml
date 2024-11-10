@@ -1,7 +1,38 @@
 ﻿@model AccountViewModel
 
-<div class="container-md">
-    <div class="col-md-6 mt-3">
+<div class="container">
+    <div class="row mt-3 justify-content-center">
+        <div class="col-3">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <form id="logoutForm" asp-controller="Account" asp-action="CreateSong" method="get">
+                        <input type="submit" class="ins-input tex-dark" value="Добавить песню">
+                    </form>
+                </li>
+                <li class="list-group-item">
+                    <form id="logoutForm" asp-controller="Account" asp-action="Logout" method="post">
+                        <input type="submit" class="ins-input tex-dark" value="Выйти из аккаунта">
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <div class="col-1">
+            
+        </div>
+        <div class="col-2">
+            <img src="~/images/user-no-avatar.png" alt="Аккаунт" class="ins-profile-img ins-profile-img-wrapper">
+        </div>
+        <div class="col-3">
+            <h6>Имя:</h6>
+            <p>@Model.CurrentUser.UserName</p>
+        </div>
+        <div class="col-3">
+            <h6>Почта:</h6>
+            <p>@Model.CurrentUser.Email</p>
+        </div>
+    </div>
+
+    <!--<div class="col-md-6 mt-3">
        <div class="mb-3">
             <h5>Информация об аккаунте</h5>
        </div>
@@ -19,6 +50,6 @@
                 <button type="submit" class="btn btn-danger">Выйти из аккаунта</button>
             </form>
         </div>
-    </div>
+    </div>-->
 </div>
 

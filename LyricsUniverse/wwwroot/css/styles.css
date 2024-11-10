@@ -55,6 +55,16 @@
     font-size: 0.5rem;
 }
 
+.ins-body {
+    background-color: #808080;
+}
+
+.ins-input {
+    background-color: transparent; /* Убирает фон */
+    border: none; /* Убирает обводку */
+    outline: none; /* Убирает обводку при фокусе */
+}
+
 .ins-btn {
     display: inline-flex;
     align-items: center;
@@ -88,8 +98,26 @@
 
 /* Стили для изображения внутри кнопки */
 .ins-icon-img {
-    width: 24px; /* Размер изображения */
+    width: 24px;
     height: 24px;
+}
+
+.ins-profile-img {
+    width: 96px; /* Размер изображения */
+    height: 96px;
+    border-radius 50%;
+}
+
+.ins-profile-img-wrapper {
+    display: inline-flex; /* Центрирует изображение по вертикали и горизонтали */
+    justify-content: center;
+    align-items: center;
+    width: 100px; /* Размер круга */
+    height: 100px; /* Размер круга */
+    border: 3px solid #000000; /* Цвет и толщина линии */
+    border-radius: 50%; /* Делаем круг */
+    padding: 5px; /* Расстояние между изображением и кругом */
+    background-color: #ffffff; /* Цвет фона внутри круга */
 }
 
 .ins-full-height-row {

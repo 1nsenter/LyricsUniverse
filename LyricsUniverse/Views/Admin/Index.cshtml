@@ -1,29 +1,43 @@
-﻿@{
-    Layout = "_AdminLayout";
-}
+﻿@model AdminViewModel
 
-@model SongsViewModel
+<div class="container-fluid mt-1">
+    <div class="row ins-full-height-row">
+        <div class="col-3 ins-fixed-col">
+            <ul class="list-group" id="menu">
+                <p class="lead text-center">Меню</p>
+                <li class="list-group-item">
+                    <a class="text-dark link" asp-controller="Admin" asp-action="Index">Список модераторов</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="text-dark link" asp-controller="" asp-action="">Назначить модератора</a>
+                </li>
+            </ul>
+        </div>
 
-<div class="container-md">
-    <div class="row justify-content-center">
-        <div class="col-md-8 mt-3">
+        <div class="col-8 ins-main-col">
             <ul class="list-group">
-                <p class="lead text-center">Редактировать</p>
-                @if (Model.Songs.Count > 0)
+                <p class="lead text-center">Список модераторов</p>
+                @if (Model.Moderators.Count > 0)
                 {
-                    @foreach (var song in Model.Songs)
+                    @foreach (var moderator in Model.Moderators)
                     {
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <a href="@Url.Action("Edit", "Admin", new { songId = song.Id })" class="text-dark">@song.Title - @song.Artist.Title</a>
-                            <form asp-action="Delete" asp-controller="Admin" asp-route-songId="@song.Id" method="post" role="form">
+                            <div class="text-dark">@moderator.UserName</div>
+                            <div class="ms-auto me-3 text-muted">
+                                @moderator.Email
+                            </div>
+                            <form asp-action="" asp-controller="" asp-route-moderatorId="@moderator.Id" method="post" role="form" class="ms-1">
                                 <button type="submit" class="btn btn-danger fs-6">Удалить</button>
                             </form>
+                            <form asp-action="" asp-controller="" asp-route-moderatorId="@moderator.Id" method="post" role="form" class="ms-1">
+                                <button type="submit" class="btn btn-primary fs-6">Профиль</button>
+                            </form>           
                         </li>
                     }
                 }
                 else
                 {
-                    <li>
+                    <li class="list-group-item">
                         <p class="text-dark">Список пуст</p>
                     </li>
                 }
