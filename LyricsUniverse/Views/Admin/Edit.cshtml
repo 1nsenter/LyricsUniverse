@@ -1,7 +1,4 @@
-﻿@{
-    Layout = "_AdminLayout";
-}
-@model EditViewModel
+﻿@model EditViewModel
 
 <div class="container-md">
     <div class="row justify-content-center">
@@ -16,6 +13,10 @@
                 <div class="mb-3">
                     <label asp-for="Text" class="input-group-text"></label>
                     <textarea asp-for="Text" class="form-control" value="@Model.Text" rows="12"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Translate" class="input-group-text"></label>
+                    <textarea asp-for="Translate" class="form-control" value="@Model.Translate" rows="12"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Сохранить</button>
             </form>

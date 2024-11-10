@@ -21,11 +21,25 @@ namespace LyricsUniverse.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(int songId = -1)
+        public async Task<IActionResult> Index(int songId = -1)
         {
+            List<AppRole> userRoles = new();
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var roles = await _userManager.GetRolesAsync(user);
+
+                foreach (var role in roles)
+                {
+                    userRoles.Add((AppRole)Enum.Parse(typeof(AppRole), role));
+                }
+            }
+
             var model = new FavoriteSongsViewModel();
             var userId = _userManager.GetUserId(User);
 
+            model.UserRoles = userRoles;
             model.SelectedSong = _context.Songs.Find(songId);
             model.FavoriteSongs = _context.FavoriteSongs
                 .Include(fs => fs.Song)
@@ -57,7 +71,7 @@ namespace LyricsUniverse.Controllers
                    
                 }
             }
-            return Redirect($"/Favorites?songId={songId}");
+            return Redirect($"/Song?songId={songId}");
         }
 
         public IActionResult Delete(int songId)
@@ -75,7 +89,7 @@ namespace LyricsUniverse.Controllers
                     _context.SaveChanges();
                 }
             }
-            return Redirect($"/Song/Id/{songId}");
+            return Redirect($"/Favorites/");
         }
     }
 }

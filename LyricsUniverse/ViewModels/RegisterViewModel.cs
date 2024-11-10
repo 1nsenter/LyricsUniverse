@@ -5,8 +5,7 @@ namespace LyricsUniverse.ViewModels
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Name")]
+        [Display(Name = "Логин")]
         public string Name { get; set; }
 
         [Required]

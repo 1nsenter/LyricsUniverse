@@ -75,5 +75,51 @@ namespace LyricsUniverse.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Edit(int songId)
+        {
+            Song song = _context.Songs.Include(s => s.Artist).FirstOrDefault(s => s.Id == songId);
+
+            return View(new ReviewViewModel
+            {
+                Id = song.Id,
+                Title = song.Title,
+                Text = song.Text,
+                Translate = song.Translate,
+                ArtistTitle = song.Artist.Title
+            });
+        }
+
+        [HttpPost]
+        public IActionResult SaveChanges(ReviewViewModel model, int songId)
+        {
+            _context.Songs.Where(s => s.Id == songId)
+            .ExecuteUpdate(b =>
+                b.SetProperty(s => s.Title, model.Title)
+            );
+
+            _context.Songs.Where(s => s.Id == songId)
+            .ExecuteUpdate(b =>
+                b.SetProperty(s => s.Text, model.Text)
+            );
+
+            _context.Songs.Where(s => s.Id == songId)
+            .ExecuteUpdate(b =>
+                b.SetProperty(s => s.Translate, model.Translate)
+            );
+
+            _context.SaveChanges();
+
+            return Redirect($"/Song?songId={songId}");
+        }
+
+        public IActionResult Delete(int songId)
+        {
+            var song = _context.Songs.FirstOrDefault(s => s.Id == songId);
+            _context.Songs.Remove(song);
+            _context.SaveChanges();
+            return Redirect("/Home/Index");
+        }
     }
 }

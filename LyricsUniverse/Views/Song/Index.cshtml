@@ -18,27 +18,38 @@
                         <h6>@Model.SelectedSong.Artist.Title</h6>
                     </div>
                     <div class="col-6 d-flex justify-content-end mb-3">
-                        @if (Model.CurrentUserRoles.Contains(AppRole.Admin) || Model.CurrentUserRoles.Contains(AppRole.Moderator))
+                        @if (Model.UserRoles.Contains(AppRole.Admin) || Model.UserRoles.Contains(AppRole.Moderator))
                         {
-                            <form asp-controller="" asp-action="" asp-route-songId="@Model.SelectedSong.Id" method="post" class="ms-1">
+                            <form asp-controller="Moderator" asp-action="Delete" asp-route-songId="@Model.SelectedSong.Id" method="post" class="ms-1">
                                 <button type="submit" class="ins-btn ins-btn-body ins-btn-rectangel">
                                     <img src="~/images/close.png" alt="Удалить" class="ins-icon-img">
                                 </button>
                             </form>
-                            <form asp-controller="" asp-action="" asp-route-songId="@Model.SelectedSong.Id" method="post" class="ms-1">
+                            <form asp-controller="Moderator" asp-action="Edit" asp-route-songId="@Model.SelectedSong.Id" method="post" class="ms-1">
                                 <button type="submit" class="ins-btn ins-btn-body ins-btn-rectangel">
                                     <img src="~/images/pen.png" alt="Редактировать" class="ins-icon-img">
                                 </button>
                             </form>
                         }
-                        @if (Model.CurrentUserRoles.Contains(AppRole.AuthorizedUser))
+                        @if (Model.UserRoles.Contains(AppRole.AuthorizedUser))
                         {
-                            <form asp-controller="Favorites" asp-action="Add" asp-route-songId="@Model.SelectedSong.Id" method="post" class="ms-1">
-                                <button type="submit" class="ins-btn ins-btn-body ins-btn-rectangel">
-                                    <img src="~/images/heart.png" alt="Избранное" class="ins-icon-img">
-                                </button>
-                            </form>
-                        }       
+                            @if (Model.IsFavorited)
+                            {
+                                <form asp-controller="Favorites" asp-action="Delete" asp-route-songId="@Model.SelectedSong.Id" method="post" class="ms-1">
+                                    <button type="submit" class="ins-btn ins-btn-body ins-btn-rectangel">
+                                        <img src="~/images/heart_red.png" alt="Удалить из Избранное" class="ins-icon-img">
+                                    </button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form asp-controller="Favorites" asp-action="Add" asp-route-songId="@Model.SelectedSong.Id" method="post" class="ms-1">
+                                    <button type="submit" class="ins-btn ins-btn-body ins-btn-rectangel">
+                                        <img src="~/images/heart.png" alt="Добавить в Избранное" class="ins-icon-img">
+                                    </button>
+                                </form>
+                            }
+                        }   
                     </div>
                 </div>
 

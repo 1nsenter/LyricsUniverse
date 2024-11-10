@@ -110,6 +110,17 @@ namespace LyricsUniverse.Models
             return createdSong;
         }
 
+        public bool IsFavorited(User user, int songId)
+        {
+            var favoriteSong = FavoriteSongs.Where(fs => fs.UserId == user.Id && fs.SongId == songId).FirstOrDefault();
+
+            if (favoriteSong != null)
+                return true;
+
+            return false;
+
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

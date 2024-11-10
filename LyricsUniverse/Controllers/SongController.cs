@@ -19,14 +19,16 @@ namespace LyricsUniverse.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Id(int id)
+        public async Task<IActionResult> Index(int songId)
         {
             List<AppRole> userRoles = new();
+            bool isFavorited = false;
 
             if (User.Identity.IsAuthenticated)
             {
                 var user = await _userManager.GetUserAsync(User);
                 var roles = await _userManager.GetRolesAsync(user);
+                isFavorited = _context.IsFavorited(user, songId);
 
                 foreach (var role in roles)
                 {
@@ -34,12 +36,13 @@ namespace LyricsUniverse.Controllers
                 }
             }
 
-            var selectedSong = _context.Songs.Find(id);
+            var selectedSong = _context.Songs.Find(songId);
             
             return View(new SongsViewModel
             {
+                IsFavorited = isFavorited,
                 DisplaySongsCount = 1,
-                CurrentUserRoles = userRoles,
+                UserRoles = userRoles,
                 Songs = _context.Songs.Include(s => s.Artist).ToList(),
                 SelectedSong = selectedSong
             });

@@ -7,8 +7,12 @@
             <form asp-controller="Account" asp-action="Register" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
                 <div asp-validation-summary="All"></div>
                 <div class="mb-3">
+                    <label asp-for="Name" class="form-label-sm"></label>
+                    <input asp-for="Name" class="form-control">
+                </div>
+                <div class="mb-3">
                     <label asp-for="Email" class="form-label-sm"></label>
-                    <input asp-for="Email" class="form-control">
+                    <input asp-for="Email" class="form-control" type="email">
                 </div>
                 <div class="mb-3">
                     <label asp-for="Password" class="form-label-sm"></label>

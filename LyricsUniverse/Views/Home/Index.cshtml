@@ -91,7 +91,7 @@
                     @for (int i = 0; i < Model.DisplaySongsCount; i++)
                     {
                         <li class="list-group-item">
-                            <a href="@Url.Action("Id", "Song", new { id = Model.Songs[i].Id })" class="text-dark link">@Model.Songs[i].Artist.Title - @Model.Songs[i].Title</a>
+                            <a href="@Url.Action("Index", "Song", new { songId = Model.Songs[i].Id })" class="text-dark link">@Model.Songs[i].Artist.Title - @Model.Songs[i].Title</a>
                         </li>
                     }
                 }
