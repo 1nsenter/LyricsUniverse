@@ -1,15 +1,11 @@
 ﻿@model CreateSongViewModel
 
 <div class="container-md">
-    <div class="row justify-content-center">
-        <div class="col-md-6 mt-3">
-            <p class="lead">Добавление</p>
-            <form asp-controller="Account" asp-action="CreateSong" method="post" class="form-horizontal" role="form">
+    <form asp-controller="Account" asp-action="CreateSong" method="post" class="form-horizontal" role="form">
+        <div class="row">
+            <p class="lead mt-3">Добавление</p>
+            <div class="col-md-6">
                 <div asp-validation-summary="All"></div>
-                <div class="mb-3">
-                    <label asp-for="Title" class="form-label-sm"></label>
-                    <input asp-for="Title" class="form-control" required>
-                </div>
                 <div class="mb-3">
                     <label asp-for="Artist" class="form-label-sm"></label>
                     <input asp-for="Artist" class="form-control" required>
@@ -18,17 +14,23 @@
                     <label asp-for="Text" class="input-group-text"></label>
                     <textarea asp-for="Text" class="form-control" rows="12" required></textarea>
                 </div>
+                <button type="submit" class="btn btn-primary mb-3">Добавить</button>
+            </div>
+            <div class="col-md-6 mt-3">
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label-sm"></label>
+                    <input asp-for="Title" class="form-control" required>
+                </div>
                 <div class="mb-3">
                     <input type="checkbox" class="form-check-input" id="toggleTextarea">
                     <label class="form-check-label" for="toggleTextarea">Добавить перевод</label>
                     <label asp-for="Translate" class="input-group-text"></label>
                     <textarea asp-for="Translate" class="form-control" rows="12" id="translateTextarea" required disabled></textarea>
-                </div>
+                </div>        
+            </div>
+        </div>        
+    </form>
 
-                <button type="submit" class="btn btn-primary mb-3">Добавить</button>
-            </form>
-        </div>
-    </div>
 </div>
 
 <script>
