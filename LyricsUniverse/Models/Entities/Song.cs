@@ -14,7 +14,9 @@ namespace LyricsUniverse.Models.Entities
         [Required]
         public string Text { get; set; }
 
-        public string? Translate { get; set; }
+        [Required]
+        public int ArtistId { get; set; }
+        public Artist Artist { get; set; }
 
         [Required]
         public bool isModerated { get; set; }
@@ -22,10 +24,8 @@ namespace LyricsUniverse.Models.Entities
         [Required]
         public DateTime CreatedAt { get; set; }
 
-        public DateTime? ApprovedAt { get; set; }
+        public string? Translate { get; set; } 
 
-        [Required]
-        public int ArtistId { get; set; }
-        public Artist Artist { get; set; }
+        public DateTime? ApprovedAt { get; set; }    
     }
 }

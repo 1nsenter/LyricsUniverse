@@ -4,8 +4,8 @@
     <div class="row mt-3 mb-5">
         <div class="col-md-4">
             <p class="lead text-center">Найти песню на сайте</p>
-            <form class="d-flex mt-2">
-                <input class="form-control me-1" type="search" placeholder="Поиск" aria-label="Search">
+            <form asp-controller="Home" asp-action="Search" class="d-flex mt-2" method="post">
+                <input name="query" class="form-control me-1" type="search" placeholder="Поиск" aria-label="Search">
                 <button class="btn btn-outline-primary" type="submit">Найти</button>
             </form>
         </div>

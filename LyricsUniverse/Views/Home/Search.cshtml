@@ -1,0 +1,24 @@
+﻿@model SearchViewModel
+
+<div class="row justify-content-center">
+    <div class="col-md-10 mt-3">
+        <ul class="list-group">
+            <p class="lead text-center">Результат поиска по запросу "@Model.Query"</p>
+            @if (Model.Songs.Count > 0)
+            {
+                @foreach (var song in Model.Songs)
+                {
+                    <li class="list-group-item">
+                        <a href="@Url.Action("Index", "Song", new { songId = song.Id })" class="text-dark link">@song.Artist.Title - @song.Title</a>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="list-group-item">
+                    <a class="text-dark link">Список пуст</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

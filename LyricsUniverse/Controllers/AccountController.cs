@@ -131,7 +131,7 @@ namespace LyricsUniverse.Controllers
 
                 _context.AddSong(newSong);
             }
-            return View(model);
+            return View(new CreateSongViewModel());
         }
 
         public IActionResult AccessDenied()
