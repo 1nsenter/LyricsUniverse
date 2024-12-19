@@ -43,6 +43,16 @@ namespace LyricsUniverse.Controllers
         {
             _context.Songs.Where(s => s.Id == songId)
             .ExecuteUpdate(b =>
+                b.SetProperty(s => s.isModerated, true)
+            );
+
+            _context.Songs.Where(s => s.Id == songId)
+            .ExecuteUpdate(b =>
+                b.SetProperty(s => s.ApprovedAt, DateTime.Now)
+            );   
+
+            _context.Songs.Where(s => s.Id == songId)
+            .ExecuteUpdate(b =>
                 b.SetProperty(s => s.Title, model.Title)
             );
 
@@ -54,16 +64,6 @@ namespace LyricsUniverse.Controllers
             _context.Songs.Where(s => s.Id == songId)
             .ExecuteUpdate(b =>
                 b.SetProperty(s => s.Translate, model.Translate)
-            );
-
-            _context.Songs.Where(s => s.Id == songId)
-            .ExecuteUpdate(b =>
-                b.SetProperty(s => s.isModerated, true)
-            );
-
-            _context.Songs.Where(s => s.Id == songId)
-            .ExecuteUpdate(b =>
-                b.SetProperty(s => s.ApprovedAt, DateTime.Now)
             );
 
             _context.SaveChanges();

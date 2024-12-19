@@ -135,5 +135,4 @@
 /* Основная колонка с прокруткой */
 .ins-main-col {
     overflow-y: auto;
-    padding: 1rem;
 }

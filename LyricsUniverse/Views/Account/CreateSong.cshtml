@@ -22,10 +22,10 @@
                     <input asp-for="Title" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <input type="checkbox" class="form-check-input" id="toggleTextarea">
-                    <label class="form-check-label" for="toggleTextarea">Добавить перевод</label>
                     <label asp-for="Translate" class="input-group-text"></label>
                     <textarea asp-for="Translate" class="form-control" rows="12" id="translateTextarea" required disabled></textarea>
+                    <input type="checkbox" class="form-check-input" id="toggleTextarea">
+                    <label class="form-check-label" for="toggleTextarea">Добавить перевод</label>
                 </div>        
             </div>
         </div>        

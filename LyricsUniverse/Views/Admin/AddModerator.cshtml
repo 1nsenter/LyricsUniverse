@@ -1,0 +1,32 @@
+﻿@model AddModeratorViewModel
+
+<div class="container-fluid mt-1">
+    <div class="row ins-full-height-row">
+        <div class="col-3 ins-fixed-col">
+            <ul class="list-group" id="menu">
+                <p class="lead text-center">Меню</p>
+                <li class="list-group-item">
+                    <a class="text-dark link" asp-controller="Admin" asp-action="Index">Список модераторов</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="text-dark link" asp-controller="Admin" asp-action="AddModerator">Назначить модератора</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-8 ins-main-col">
+            <form asp-controller="Admin" asp-action="AddModerator" method="post" class="form-horizontal ms-5" role="form">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <p class="lead">Назначение нового модератора</p>
+                <div class="col-md-6">
+                    <div asp-validation-summary="All"></div>
+                    <div class="mb-3">
+                        <label class="form-label-sm">Почта</label>
+                        <input name="email" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-3">Назначить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -46,13 +46,10 @@ namespace LyricsUniverse.Controllers
                 });
             }
 
-            // Разделение запроса на слова
             var keywords = query.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            // Приведение всех слов к нижнему регистру
             keywords = keywords.Select(k => k.ToLower()).ToArray();
 
-            // Поиск песен, где любое из слов встречается в названии, исполнителе или тексте
             var songs = await _context.Songs
                 .Include(s => s.Artist)
                 .Where(s => s.isModerated == true &&

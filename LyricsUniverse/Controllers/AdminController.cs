@@ -4,6 +4,7 @@ using LyricsUniverse.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace LyricsUniverse.Controllers
 {
@@ -12,7 +13,6 @@ namespace LyricsUniverse.Controllers
     {
         private readonly LyricsDbContext _context;
         private readonly UserManager<User> _userManager;
-
         public AdminController(LyricsDbContext context, UserManager<User> userManager)
         {
             _context = context;
@@ -37,6 +37,39 @@ namespace LyricsUniverse.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddModerator()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddModerator(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email.ToUpper());
+
+            if (user == null)
+            {
+                ModelState.AddModelError("UserIsNull", "Пользователь с такой почтой не найден в системе");
+                return View(email);
+            }
+
+            await _userManager.AddToRoleAsync(user, AppRole.Moderator.ToString());
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> RemoveModerator(string moderatorId)
+        {
+            var user = await _userManager.FindByIdAsync(moderatorId);
+
+            if (user == null)
+                ModelState.AddModelError("UserIsNull", "Модератор не найден в системе");
+            else
+                await _userManager.RemoveFromRoleAsync(user, AppRole.Moderator.ToString());
+
+            return RedirectToAction("Index");
         }
     }
 }
